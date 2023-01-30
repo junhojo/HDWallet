@@ -46,7 +46,8 @@ public final class MnemonicWallet {
     }
 
     public static func createEntropy(mnemonic: String, language: WordList = .english) -> Data? {
-        let mnemonic = try! Mnemonic(mnemonic: mnemonic.components(separatedBy: " "))
+        let wordArray : [String] = mnemonic.split(separator: " ").map{String($0)}
+        let mnemonic = try! Mnemonic(mnemonic: wordArray)
         print("Entropy: ", mnemonic.entropy)
         let entropy = Data(mnemonic.entropy)
         return entropy

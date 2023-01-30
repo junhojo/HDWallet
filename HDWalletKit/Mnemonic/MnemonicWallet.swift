@@ -45,10 +45,9 @@ public final class MnemonicWallet {
         return mnemonic.joined(separator: " ")
     }
 
-    public static func createEntropy(mnemonic: String, language: WordList = .english) -> Data? {
+    public static func createEntropy(mnemonic: String, language: WordList = .english) throws -> Data? {
         let wordArray : [String] = mnemonic.split(separator: " ").map{String($0)}
-        let mnemonic = try! Mnemonic(mnemonic: wordArray)
-        print("Entropy: ", mnemonic.entropy)
+        let mnemonic = try Mnemonic(mnemonic: wordArray)
         let entropy = Data(mnemonic.entropy)
         return entropy
     }
